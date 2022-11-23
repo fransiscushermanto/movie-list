@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout";
 import { QueryProvider } from "./context/QueryContext";
 
 import Home from "./routes/Home";
@@ -6,9 +7,11 @@ import Home from "./routes/Home";
 function App() {
   return (
     <QueryProvider>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </Layout>
     </QueryProvider>
   );
 }

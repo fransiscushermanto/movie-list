@@ -10,7 +10,7 @@ const useQuery = <TData = unknown>({
   onSuccess,
   onError,
 }: UseQueryOptions): UseQueryReturn<TData> => {
-  const key = queryKey.toString();
+  const key = queryKey?.toString() ?? "";
   const { state, setQueryState, invalidateQueryState } = useQueryState(key);
   const [isLoading, setIsLoading] = useState<boolean>(state?.isLoading ?? true);
   const [isError, setIsError] = useState<boolean>(state?.isError ?? false);
@@ -27,7 +27,7 @@ const useQuery = <TData = unknown>({
       setIsLoading(true);
       setStatus("loading");
       try {
-        const { data } = await fetchFn(params);
+        const { data } = (await fetchFn?.(params)) ?? {};
         setIsSuccess(true);
         setStatus("success");
         setData(data);

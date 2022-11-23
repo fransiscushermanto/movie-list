@@ -1,19 +1,17 @@
-import { UseQueryReturn } from "./types";
-
-type QueryValue = UseQueryReturn | undefined | null;
+import { QueryValue, QueryType } from "./types";
 
 class Query {
-  private query: Record<any, QueryValue>;
+  private query: Record<any, any>;
 
   constructor() {
     this.query = {};
   }
 
-  setQuery(key: string, query: QueryValue) {
+  setQuery<T extends QueryType = "single">(key: string, query: QueryValue<T>) {
     this.query[key] = query;
   }
 
-  getQuery(key: string): QueryValue {
+  getQuery<T extends QueryType = "single">(key: string): QueryValue<T> {
     return this.query[key];
   }
 

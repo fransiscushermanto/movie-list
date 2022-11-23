@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import { useCallback } from "react";
 import { createContext } from "react";
 import { Query, queryClient } from "../hooks/use-query/Query";
-import { UseQueryReturn } from "../hooks/use-query/types";
+import { QueryType, QueryValue } from "../hooks/use-query/types";
 
 interface QueryProviderProps {
   children: ReactNode;
@@ -18,11 +18,11 @@ const QueryProvider: FC<QueryProviderProps> = ({ children }) => {
   );
 };
 
-function useQueryState(key: string) {
-  const cacheValue = queryClient.getQuery(key);
+function useQueryState<T extends QueryType = "single">(key: string) {
+  const cacheValue = queryClient.getQuery<T>(key);
 
   const setQueryState = useCallback(
-    (value: UseQueryReturn) => {
+    (value: QueryValue<T>) => {
       queryClient.setQuery(key, value);
     },
     [key],

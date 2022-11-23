@@ -4,3 +4,8 @@ export interface MovieModel {
   Year: string;
   Type: string;
 }
+
+export interface MovieResponse {
+  Search: MovieModel[];
+  totalResults: number;
+}
