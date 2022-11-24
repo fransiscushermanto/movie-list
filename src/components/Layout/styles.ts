@@ -12,6 +12,7 @@ export const mainCx = css`
 `;
 
 export const mobileHeaderCx = css`
+  z-index: 1;
   background-color: white;
   position: fixed;
   top: 0;

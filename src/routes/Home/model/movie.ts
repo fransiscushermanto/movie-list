@@ -3,6 +3,7 @@ export interface MovieModel {
   Title: string;
   Year: string;
   Type: string;
+  imdbID: string;
 }
 
 export interface MovieResponse {
