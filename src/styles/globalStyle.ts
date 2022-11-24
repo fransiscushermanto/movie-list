@@ -34,6 +34,41 @@ const globalStyle = css`
     margin-block-start: 0;
     margin-block-end: 0;
   }
+
+  .movie-type {
+    height: 14px;
+    min-width: 41px;
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    width: fit-content;
+
+    border-radius: 4px;
+    padding: 0 5px;
+
+    color: white;
+
+    &.movie {
+      background-color: red;
+    }
+    &.series {
+      background-color: blueviolet;
+    }
+    &.episode {
+      background-color: black;
+    }
+  }
+
+  .movie-like {
+    display: flex;
+    margin-left: auto;
+    svg {
+      &[like="true"] {
+        fill: orangered;
+      }
+    }
+  }
 `;
 
 export default globalStyle;

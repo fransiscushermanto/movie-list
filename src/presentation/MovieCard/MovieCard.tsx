@@ -1,10 +1,11 @@
 import { cx } from "@emotion/css";
 import { FC, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Link } from "react-router-dom";
+
 import Heart from "../../assets/icons/Heart";
 import Skeleton from "../../components/Skeleton";
-
-import { MovieModel } from "../../routes/Home/model/movie";
+import { MovieModel } from "../../model/movie";
 import { movieCardCx } from "./style";
 
 interface MovieCardProps extends MovieModel {
@@ -12,7 +13,7 @@ interface MovieCardProps extends MovieModel {
 }
 
 const MovieCard: FC<MovieCardProps> = (props) => {
-  const { Title, Poster, Type, Year, isLoading } = props;
+  const { Title, Poster, Type, Year, imdbID, isLoading } = props;
 
   const [isLike, setIsLike] = useState(false);
 
@@ -21,19 +22,23 @@ const MovieCard: FC<MovieCardProps> = (props) => {
   return (
     <li className={cx("movie-card", movieCardCx)}>
       <Skeleton isLoading={isLoading}>
-        <div className="movie-poster">
-          {isAvailablePoster ? (
-            <LazyLoadImage
-              loading="lazy"
-              src={Poster}
-              alt={Title}
-              width={150}
-              height={200}
-            />
-          ) : (
-            <div className="placeholder" />
-          )}
-        </div>
+        {isLoading ? (
+          <div className="movie-poster" />
+        ) : (
+          <Link className="movie-poster" to={`/detail/${imdbID}`}>
+            {isAvailablePoster ? (
+              <LazyLoadImage
+                loading="lazy"
+                src={Poster}
+                alt={Title}
+                width={150}
+                height={200}
+              />
+            ) : (
+              <div className="placeholder" />
+            )}
+          </Link>
+        )}
       </Skeleton>
       <div className="movie-info">
         <Skeleton isLoading={isLoading}>
@@ -48,17 +53,19 @@ const MovieCard: FC<MovieCardProps> = (props) => {
         </Skeleton>
         <div className="bottom-info">
           <Skeleton isLoading={isLoading}>
-            <div className={cx("type", Type)}>
+            <div className={cx("movie-type", Type)}>
               <span>{Type}</span>
             </div>
           </Skeleton>
-          <div className="like">
-            <Heart
-              icontype={isLike ? "fill" : "outline"}
-              like={String(isLike)}
-              onClick={() => setIsLike((prev) => !prev)}
-            />
-          </div>
+          {!isLoading && (
+            <div className="like">
+              <Heart
+                icontype={isLike ? "fill" : "outline"}
+                like={String(isLike)}
+                onClick={() => setIsLike((prev) => !prev)}
+              />
+            </div>
+          )}
         </div>
       </div>
     </li>

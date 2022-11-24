@@ -1,5 +1,7 @@
-import { lazy } from "react";
+import loadable from "@loadable/component";
 
-const Lazy = lazy(() => import(/* webpackChunkName: "home-page" */ "./Home"));
+const Lazy = loadable(
+  () => import(/* webpackChunkName: "home-page" */ "./Home"),
+);
 
 export default Lazy;
