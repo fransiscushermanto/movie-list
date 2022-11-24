@@ -2,23 +2,13 @@ import { css } from "@emotion/css";
 
 export const movieCardCx = css`
   display: flex;
+  text-decoration: none;
+  color: black;
   .movie-poster {
-    cursor: pointer;
-    margin-right: 16px;
-
-    width: 150px;
-    min-width: 150px;
-    height: 200px;
-    min-height: 200px;
+    margin-right: 1rem;
     img,
     .placeholder {
       border-radius: 10px;
-      width: 100%;
-      height: 100%;
-    }
-
-    .placeholder {
-      background: rgba(0, 0, 0, 0.2);
     }
   }
   .movie-info {

@@ -11,7 +11,7 @@ const useGetMovie = (options: UseQueryOptions = {}) => {
     axios.get("", {
       params: {
         i: imdbID,
-        plot: "full",
+        plot: "short",
       },
     });
 

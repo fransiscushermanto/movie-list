@@ -40,3 +40,5 @@ export const navCx = css`
     color: black;
   }
 `;
+
+export const mobileToolbarCx = css``;

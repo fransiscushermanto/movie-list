@@ -11,6 +11,11 @@ export interface GetMoviesResponse {
   totalResults: number;
 }
 
+export interface MovieRating {
+  Source: "Internet Movie Database" | "Metacritic" | "Rotten Tomatoes";
+  Value: string;
+}
+
 export interface DetailMovieModel extends MovieModel {
   Actors: string;
   Awards: string;
@@ -31,4 +36,5 @@ export interface DetailMovieModel extends MovieModel {
   Writer: string;
   imdbRating: string;
   imdbVotes: string;
+  Ratings: MovieRating[];
 }

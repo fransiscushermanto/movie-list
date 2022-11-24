@@ -5,19 +5,27 @@ export const detailCx = css`
 
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
 
   padding: 10px 20px 20px;
 
   .movie-top-wrapper {
     margin-bottom: 20px;
+    .title {
+      min-height: 44px;
+      margin-bottom: 4px;
+      width: 100%;
+    }
     .subtitle {
+      min-height: 19px;
       font-size: 14px;
       > *:not(:last-child) {
         margin-right: 8px;
       }
     }
     .movie-type {
+      min-height: 14px;
+      min-width: 41.3px;
       margin-top: 10px;
     }
   }
@@ -37,10 +45,12 @@ export const detailCx = css`
       flex-direction: column;
       width: 100%;
       .genres {
+        min-width: 58.6px;
+        min-height: 29px;
+
         display: flex;
         flex-wrap: wrap;
         font-size: 14px;
-        margin-bottom: 10px;
         .genre {
           &:not(:last-child) {
             margin-right: 8px;
@@ -51,12 +61,72 @@ export const detailCx = css`
         }
       }
 
-      .movie-like {
-        margin-top: auto;
+      .synopsis {
+        min-height: 95px;
+        margin-top: 10px;
+
+        > p {
+          margin: 0;
+          font-size: 14px;
+        }
       }
     }
   }
 
+  .movie-ratings {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 10px;
+
+    width: 100%;
+    min-height: 113.5px;
+    .rating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: center;
+      &.imdb {
+        .icon {
+          display: flex;
+        }
+        .rate > span {
+          &:nth-child(1) {
+            font-size: 18px;
+          }
+          &:nth-child(2) {
+            font-size: 14px;
+          }
+        }
+
+        .votes {
+          font-size: 14px;
+          color: grey;
+        }
+      }
+      &.metacritic {
+        .rate {
+          padding: 8px;
+          margin-bottom: 8px;
+          font-size: 14px;
+          font-weight: bold;
+          &.excellence {
+            color: white;
+            background-color: #6c3;
+          }
+          &.good {
+            background-color: #fc3;
+          }
+          &.bad {
+            color: white;
+            background-color: #f00;
+          }
+        }
+      }
+    }
+  }
   .info {
     display: flex;
     flex-direction: column;
@@ -64,21 +134,39 @@ export const detailCx = css`
       margin-bottom: 10px;
     }
     .label {
+      min-width: 86.77px;
+      min-height: 21.5px;
+      width: fit-content;
+      margin-bottom: 4px;
       font-weight: bold;
     }
     .value {
+      min-height: 19px;
       font-size: 14px;
       color: grey;
     }
   }
 
-  .synopsis {
+  .movie-detail {
     margin-top: 20px;
-    .title {
-      margin-bottom: 10px;
-    }
-    > p {
-      margin: 0;
-    }
+  }
+`;
+
+export const genreCx = (lastRow: number) => css`
+  &[data-row-status="next"] {
+    margin-right: 0.5rem;
+  }
+
+  &[data-row-status="next"],
+  &[data-row-status="next-row"] {
+    margin-bottom: 0.5rem;
+  }
+
+  &[data-row="${lastRow}"] {
+    margin-bottom: 0;
+  }
+
+  &[data-col-status="last"] {
+    margin-right: 0;
   }
 `;

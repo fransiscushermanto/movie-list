@@ -59,16 +59,6 @@ const globalStyle = css`
       background-color: black;
     }
   }
-
-  .movie-like {
-    display: flex;
-    margin-left: auto;
-    svg {
-      &[like="true"] {
-        fill: orangered;
-      }
-    }
-  }
 `;
 
 export default globalStyle;
