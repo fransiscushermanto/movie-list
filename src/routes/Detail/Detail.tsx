@@ -4,7 +4,7 @@ import Star from "../../assets/icons/Star";
 import Header from "../../components/Layout/Header";
 import Skeleton from "../../components/Skeleton";
 import { useWatchlist } from "../../context/WatchlistContext";
-import MoviePoster from "../../presentation/MoviePoster";
+import { MoviePoster } from "../../presentation/MovieCard";
 import { detectWrap } from "../../utils/detectWrap";
 
 import useGetMovie from "./repository/use-get-movie";

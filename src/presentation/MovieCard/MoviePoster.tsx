@@ -30,7 +30,7 @@ const MoviePoster: FC<MoviePosterProps> = (props) => {
         <div className={cx("movie-poster", moviePosterCx)}>
           {!isLoading && (
             <div
-              className="watchlist"
+              className={cx("watchlist", { added: isMovieSaved })}
               onClick={(e) => {
                 e.preventDefault();
                 onClickBookmark?.();

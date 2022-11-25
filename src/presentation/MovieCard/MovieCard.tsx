@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Skeleton from "../../components/Skeleton";
 import { useWatchlist } from "../../context/WatchlistContext";
 import { MovieModel } from "../../model/movie";
-import MoviePoster from "../MoviePoster";
+import MoviePoster from "./MoviePoster";
 import { movieCardCx } from "./style";
 
 interface MovieCardProps extends MovieModel {
@@ -24,7 +24,7 @@ const MovieCard: FC<MovieCardProps> = (props) => {
   }, [addToWatchlist, imdbID, isMovieInWatchlist, props, removeFromWatchlist]);
 
   return (
-    <li className="movie-card">
+    <li className="movie-card" data-testid={`movie-${imdbID}`}>
       <Link
         className={cx(movieCardCx, { loading: isLoading })}
         to={`/detail/${imdbID}`}

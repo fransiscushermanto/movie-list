@@ -32,7 +32,7 @@ const ImdbBookmark = ({
   [key: string]: any;
 }) =>
   icontype === "fill" ? (
-    <div onClick={onClick} className={ribbonCx}>
+    <div onClick={onClick} data-testid="bookmark-saved" className={ribbonCx}>
       <svg
         className="ipc-watchlist-ribbon__bg"
         width="24px"
@@ -73,7 +73,7 @@ const ImdbBookmark = ({
       </svg>
     </div>
   ) : (
-    <div onClick={onClick} className={ribbonCx}>
+    <div onClick={onClick} data-testid="bookmark-unsaved" className={ribbonCx}>
       <svg
         className="ipc-watchlist-ribbon__bg"
         width="32px"
