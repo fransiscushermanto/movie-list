@@ -1,7 +1,7 @@
 import loadable from "@loadable/component";
 
 const Lazy = loadable(
-  () => import(/* webpackChunkName: "detail-page" */ "./Detail"),
+  () => import(/* webpackChunkName: "watchlist-page" */ "./Watchlist"),
 );
 
 export default Lazy;

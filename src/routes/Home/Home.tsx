@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import Header from "../../components/Layout/Header";
 import useIntersectionObserver from "../../hooks/use-intersection-observer";
 import MovieCard from "../../presentation/MovieCard";
 import useGetMovies from "./repository/use-get-movies";
@@ -19,34 +20,37 @@ const Home = () => {
   });
 
   return (
-    <div className={movieListWrapperCx}>
-      {movies?.map((page, i) => (
-        <ul key={i} className="movie-list">
-          {page.map((movie) => (
-            <MovieCard
-              key={`${i}:${movie.Title}${movie.Year}${movie.imdbID}`}
-              {...movie}
-            />
-          ))}
-        </ul>
-      ))}
-      {isLoading && (
-        <ul className="movie-list">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <MovieCard
-              key={i}
-              Poster=""
-              Title=""
-              Type=""
-              Year=""
-              imdbID=""
-              isLoading
-            />
-          ))}
-        </ul>
-      )}
-      <div ref={intersectionRef} className={intersectionCx} />
-    </div>
+    <>
+      <Header title="Movie" />
+      <div className={movieListWrapperCx}>
+        {movies?.map((page, i) => (
+          <ul key={i} className="movie-list">
+            {page.map((movie) => (
+              <MovieCard
+                key={`${i}:${movie.Title}${movie.Year}${movie.imdbID}`}
+                {...movie}
+              />
+            ))}
+          </ul>
+        ))}
+        {isLoading && (
+          <ul className="movie-list">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <MovieCard
+                key={i}
+                Poster=""
+                Title=""
+                Type=""
+                Year=""
+                imdbID=""
+                isLoading
+              />
+            ))}
+          </ul>
+        )}
+        <div ref={intersectionRef} className={intersectionCx} />
+      </div>
+    </>
   );
 };
 

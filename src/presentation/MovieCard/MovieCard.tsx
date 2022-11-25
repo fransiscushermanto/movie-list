@@ -1,8 +1,9 @@
 import { cx } from "@emotion/css";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import Skeleton from "../../components/Skeleton";
+import { useWatchlist } from "../../context/WatchlistContext";
 import { MovieModel } from "../../model/movie";
 import MoviePoster from "../MoviePoster";
 import { movieCardCx } from "./style";
@@ -14,11 +15,24 @@ interface MovieCardProps extends MovieModel {
 const MovieCard: FC<MovieCardProps> = (props) => {
   const { Title, Poster, Type, Year, imdbID, isLoading } = props;
 
+  const { isMovieInWatchlist, addToWatchlist, removeFromWatchlist } =
+    useWatchlist();
+
+  const handleClickBookmark = useCallback(() => {
+    if (!isMovieInWatchlist(imdbID)) return addToWatchlist(props);
+    removeFromWatchlist(imdbID);
+  }, [addToWatchlist, imdbID, isMovieInWatchlist, props, removeFromWatchlist]);
+
   return (
     <li className="movie-card">
-      <Link className={movieCardCx} to={`/detail/${imdbID}`}>
+      <Link
+        className={cx(movieCardCx, { loading: isLoading })}
+        to={`/detail/${imdbID}`}
+      >
         <MoviePoster
           isLoading={isLoading}
+          isMovieSaved={isMovieInWatchlist(imdbID)}
+          onClickBookmark={handleClickBookmark}
           width={150}
           height={200}
           src={Poster}

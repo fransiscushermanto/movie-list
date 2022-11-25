@@ -14,7 +14,14 @@ export type QueryReturn<T extends QueryType, TData = any> = Omit<
 
 export type QueryValue<T extends QueryType> = QueryReturn<T> | undefined | null;
 
-export type UseQueryReturn<TData = any> = QueryReturn<"single", TData>;
+export interface UseQueryReturn<TData = any>
+  extends QueryReturn<"single", TData> {
+  isLoading: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  status: ApiStatus;
+  refetch: (...args: any) => Promise<void>;
+}
 export type UseInfiniteQueryReturn<TData = any> = QueryReturn<
   "infinite",
   TData
@@ -36,11 +43,11 @@ export interface UseInfiniteQueryOptions extends UseQueryOptions {
 export interface RawUseQueryReturn<TData = any> {
   type: "single";
   data?: TData;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  status: ApiStatus;
-  refetch: (...args: any) => Promise<void>;
+  isLoading?: boolean;
+  isSuccess?: boolean;
+  isError?: boolean;
+  status?: ApiStatus;
+  refetch?: (...args: any) => Promise<void>;
 }
 
 export interface RawUseInfiniteQueryReturn<TData = any>

@@ -4,6 +4,11 @@ export const movieCardCx = css`
   display: flex;
   text-decoration: none;
   color: black;
+
+  &.loading {
+    user-select: none;
+    pointer-events: none;
+  }
   .movie-poster {
     margin-right: 1rem;
     img,

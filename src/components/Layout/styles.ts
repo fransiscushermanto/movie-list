@@ -1,17 +1,13 @@
 import { css } from "@emotion/css";
 
-const headerHeight = 50;
-
 export const mainCx = css`
   max-width: var(--container-width);
   margin: 0 auto;
 
-  margin-top: ${headerHeight}px;
   height: 100%;
-  max-height: calc(100% - ${headerHeight}px);
 `;
 
-export const mobileHeaderCx = css`
+export const headerCx = css`
   z-index: 1;
   background-color: white;
   position: fixed;
@@ -23,7 +19,7 @@ export const mobileHeaderCx = css`
 export const navCx = css`
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
 
-  height: ${headerHeight}px;
+  height: var(--mobile-header-height);
 
   .inner-nav {
     display: flex;
@@ -33,6 +29,16 @@ export const navCx = css`
     height: 100%;
     padding: 0 20px;
     margin: 0 auto;
+    .back-btn {
+      cursor: pointer;
+      display: flex;
+      margin-right: 8px;
+    }
+    .title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   .brand {
@@ -41,4 +47,29 @@ export const navCx = css`
   }
 `;
 
-export const mobileToolbarCx = css``;
+export const toolbarCx = css`
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  width: 100%;
+  height: var(--mobile-toolbar-height);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  .menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    i {
+      display: flex;
+      margin-bottom: 4px;
+    }
+    span {
+      text-transform: capitalize;
+    }
+  }
+`;

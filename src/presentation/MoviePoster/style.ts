@@ -2,7 +2,6 @@ import { css } from "@emotion/css";
 
 export const moviePosterCx = css`
   position: relative;
-  cursor: pointer;
 
   display: flex;
   width: 150px;
@@ -11,13 +10,13 @@ export const moviePosterCx = css`
   min-height: 200px;
 
   .watchlist {
+    cursor: pointer;
     position: absolute;
     display: flex;
     top: 0;
     left: 5%;
   }
 
-  img,
   .placeholder {
     width: 100%;
     height: 100%;

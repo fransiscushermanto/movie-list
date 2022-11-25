@@ -1,8 +1,8 @@
 import { cx } from "@emotion/css";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import Bookmark from "../../assets/icons/Bookmark";
+import Bookmark from "../../assets/icons/ImdbBookmark";
 import Skeleton from "../../components/Skeleton";
 import { moviePosterCx } from "./style";
 
@@ -12,11 +12,13 @@ interface MoviePosterProps {
   alt: string;
   width: string | number;
   height: string | number;
+  isMovieSaved?: boolean;
+  onClickBookmark?: () => void;
 }
 
 const MoviePoster: FC<MoviePosterProps> = (props) => {
-  const { isLoading, src, alt, width, height } = props;
-  const [isLike, setIsLike] = useState(false);
+  const { isLoading, src, alt, width, height, isMovieSaved, onClickBookmark } =
+    props;
 
   const isAvailablePoster = src && src !== "N/A";
 
@@ -27,16 +29,18 @@ const MoviePoster: FC<MoviePosterProps> = (props) => {
       ) : (
         <div className={cx("movie-poster", moviePosterCx)}>
           {!isLoading && (
-            <div className="watchlist">
+            <div
+              className="watchlist"
+              onClick={(e) => {
+                e.preventDefault();
+                onClickBookmark?.();
+              }}
+            >
               <Bookmark
                 width={30}
                 height={30}
-                icontype={isLike ? "fill" : "outline"}
-                like={String(isLike)}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsLike((prev) => !prev);
-                }}
+                icontype={isMovieSaved ? "fill" : "outline"}
+                like={String(isMovieSaved)}
               />
             </div>
           )}

@@ -1,18 +1,28 @@
-import { ReactNode } from "react";
+import { cx } from "@emotion/css";
+import { ReactNode, useEffect } from "react";
 import { FC } from "react";
+import { useLocation } from "react-router-dom";
+import Toolbar from "./Toolbar";
 
-import MobileHeader from "./MobileHeader";
 import { mainCx } from "./styles";
 
 interface LayoutProps {
   children: ReactNode;
+  hideToolbar?: boolean;
 }
 
-const Layout: FC<LayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children, hideToolbar }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   return (
     <>
-      <MobileHeader />
-      <main className={mainCx}>{children}</main>
+      <main className={cx(mainCx, { "with-toolbar": !hideToolbar })}>
+        {children}
+      </main>
+      {!hideToolbar && <Toolbar />}
     </>
   );
 };

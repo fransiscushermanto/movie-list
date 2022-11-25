@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 const globalStyle = css`
   :root {
     --container-width: 1024px;
+    --mobile-header-height: 50px;
+    --mobile-toolbar-height: 70px;
   }
 
   html {
@@ -17,7 +19,16 @@ const globalStyle = css`
   body,
   #root {
     margin: 0;
-    height: 100%;
+    height: auto;
+  }
+
+  #root {
+    > header.mobile-header + main {
+      margin-top: var(--mobile-header-height);
+      &.with-toolbar {
+        margin-bottom: var(--mobile-toolbar-height);
+      }
+    }
   }
 
   body {
@@ -57,6 +68,9 @@ const globalStyle = css`
     }
     &.episode {
       background-color: black;
+    }
+    &.game {
+      background-color: cadetblue;
     }
   }
 `;
