@@ -27,7 +27,7 @@ const WatchlistContext = createContext<WatchlistContextProps>({
   removeFromWatchlist: () => {},
 });
 
-const WATCHLIST_STORAGE_KEY = "my-watchlist";
+export const WATCHLIST_STORAGE_KEY = "my-watchlist";
 
 const WatchlistProvider: FC<WatchlistProviderProps> = ({ children }) => {
   const [watchlist, setWatchlist] = useState<(MovieModel | DetailMovieModel)[]>(
@@ -92,4 +92,4 @@ const useWatchlist = () => {
   return useContext(WatchlistContext);
 };
 
-export { WatchlistProvider, useWatchlist };
+export { WatchlistProvider, useWatchlist, WatchlistContext };

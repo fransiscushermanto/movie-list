@@ -13,6 +13,7 @@ import Detail, { DetailLoader } from "./routes/Detail";
 import NotFound from "./routes/NotFound";
 import Watchlist from "./routes/Watchlist";
 import { WatchlistProvider } from "./context/WatchlistContext";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/watchlist",
+    errorElement: <NotFound />,
     element: (
       <Layout>
         <Watchlist />
@@ -49,12 +51,14 @@ const router = createBrowserRouter([
 ]);
 
 root.render(
-  <QueryProvider>
-    <WatchlistProvider>
-      <RouterProvider router={router} />
-      <Global styles={globalStyle} />
-    </WatchlistProvider>
-  </QueryProvider>,
+  <ErrorBoundary>
+    <QueryProvider>
+      <WatchlistProvider>
+        <RouterProvider router={router} />
+        <Global styles={globalStyle} />
+      </WatchlistProvider>
+    </QueryProvider>
+  </ErrorBoundary>,
 );
 
 // If you want to start measuring performance in your app, pass a function

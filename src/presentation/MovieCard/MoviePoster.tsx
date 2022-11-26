@@ -31,6 +31,7 @@ const MoviePoster: FC<MoviePosterProps> = (props) => {
           {!isLoading && (
             <div
               className={cx("watchlist", { added: isMovieSaved })}
+              data-testid="action-bookmark-btn"
               onClick={(e) => {
                 e.preventDefault();
                 onClickBookmark?.();
