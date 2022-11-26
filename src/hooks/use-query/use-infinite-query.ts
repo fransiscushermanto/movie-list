@@ -11,6 +11,7 @@ const useInfiniteQuery = <TData = unknown>({
   onError,
   getNextPageParam,
   getPreviousPageParam,
+  invalidateOnUnmount = true,
 }: UseInfiniteQueryOptions): UseInfiniteQueryReturn<TData[]> => {
   const key = queryKey?.toString() ?? "";
   const { state, setQueryState, invalidateQueryState } =
@@ -22,11 +23,11 @@ const useInfiniteQuery = <TData = unknown>({
   const [isLoading, setIsLoading] = useState(state?.isLoading ?? true);
   const [isError, setIsError] = useState(state?.isError ?? false);
   const [isSuccess, setIsSuccess] = useState(state?.isSuccess ?? false);
-  const [data, setData] = useState<TData[]>(state?.data);
+  const [data, setData] = useState<TData[] | undefined>(state?.data);
   const [status, setStatus] = useState<ApiStatus>(
     state?.status ?? data ? "success" : "loading",
   );
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(data?.length || 1);
 
   const fetch = useCallback(
     async (params: { page?: any } = { page: 1 }) => {
@@ -102,8 +103,13 @@ const useInfiniteQuery = <TData = unknown>({
 
   useEffect(() => {
     return () => {
-      invalidateQueryState();
+      if (invalidateOnUnmount) {
+        invalidateQueryState();
+      }
     };
+
+    // expect not to listen to invalidateOnUnmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidateQueryState]);
 
   return queryValue;

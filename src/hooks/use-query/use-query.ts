@@ -9,6 +9,7 @@ const useQuery = <TData = unknown>({
   fetchFn,
   onSuccess,
   onError,
+  invalidateOnUnmount = true,
 }: UseQueryOptions): UseQueryReturn<TData> => {
   const key = queryKey?.toString() ?? "";
   const { state, setQueryState, invalidateQueryState } = useQueryState(key);
@@ -63,8 +64,13 @@ const useQuery = <TData = unknown>({
 
   useEffect(() => {
     return () => {
-      invalidateQueryState();
+      if (invalidateOnUnmount) {
+        invalidateQueryState();
+      }
     };
+
+    // expect not to listen to invalidateOnUnmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [invalidateQueryState]);
 
   return { data, isLoading, isSuccess, isError, status, refetch: fetch };

@@ -18,6 +18,7 @@ const useGetMovies = (options: UseInfiniteQueryOptions = {}) => {
     ...options,
     queryKey: ["movies"],
     fetchFn: options.fetchFn ?? defaultFunction,
+    invalidateOnUnmount: false,
   });
 
   const movies = useMemo(() => {

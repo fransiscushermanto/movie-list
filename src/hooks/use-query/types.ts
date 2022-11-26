@@ -33,6 +33,10 @@ export interface UseQueryOptions {
   fetchFn?: (...args: any) => Promise<AxiosResponse>;
   onSuccess?: (data: any) => void;
   onError?: (error: Error) => void;
+  /**
+   * @default true;
+   */
+  invalidateOnUnmount?: boolean;
 }
 
 export interface UseInfiniteQueryOptions extends UseQueryOptions {
