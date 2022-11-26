@@ -148,10 +148,12 @@ const Detail = () => {
               <div
                 className={cx(
                   "rate",
-                  getMetascoreLevel(Number(metacriticRating[0] ?? 0)),
+                  getMetascoreLevel(
+                    metacriticRating[0] ? Number(metacriticRating[0]) : "N/A",
+                  ),
                 )}
               >
-                <span>{metacriticRating[0]}</span>
+                <span>{metacriticRating[0] || "N/A"}</span>
               </div>
               <div className="title">
                 <span>Metascore</span>

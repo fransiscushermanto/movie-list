@@ -112,6 +112,10 @@ export const detailCx = css`
           margin-bottom: 8px;
           font-size: 14px;
           font-weight: bold;
+          &.unknown {
+            color: white;
+            background-color: grey;
+          }
           &.excellence {
             color: white;
             background-color: #6c3;
